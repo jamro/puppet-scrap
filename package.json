@@ -1,11 +1,11 @@
 {
-  "name": "puppet-scraper",
+  "name": "puppet-scrap",
   "version": "1.0.0",
   "type": "module",
   "description": "",
-  "main": "puppet-scraper.js",
+  "main": "puppet-scrap.js",
   "bin": {
-    "puppet-scraper": "./puppet-scraper.js"
+    "puppet-scrap": "./puppet-scrap.js"
   },
   "scripts": {
     "example": "node example/www/index.js",
@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jamro/puppet-scraper.git"
+    "url": "git+https://github.com/jamro/puppet-scrap.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jamro/puppet-scraper/issues"
+    "url": "https://github.com/jamro/puppet-scrap/issues"
   },
-  "homepage": "https://github.com/jamro/puppet-scraper#readme",
+  "homepage": "https://github.com/jamro/puppet-scrap#readme",
   "dependencies": {
     "chalk": "^5.3.0",
     "commander": "^11.0.0",

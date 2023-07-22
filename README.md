@@ -23,7 +23,7 @@ Puppet Scraper is a Node.js application designed to scrape data from web pages u
 ## Usage
 To display Puppet Scraper usage instruction run
   ```
-  puppet-scraper.js --help
+  puppet-scrap.js --help
   ```
 
 ## How it works
@@ -41,7 +41,7 @@ To display Puppet Scraper usage instruction run
 Using Puppet Scraper with the provided example:
 
   ```bash
-  puppet-scraper.js --dataset ./data/products_1.json --script ./scripts/list.js --query '$[*]' --output ./data/products_2.json
+  puppet-scrap.js --dataset ./data/products_1.json --script ./scripts/list.js --query '$[*]' --output ./data/products_2.json
   ```
 
 This will execute Puppet Scraper on the `./data/products_1.json` dataset file. It will apply the scraping script located at `./scripts/list.js` to each data point selected by the JSON Path query `$[*]`. The scraped information will be updated in the dataset, and the final dataset will be saved to `./data/products_2.json`
