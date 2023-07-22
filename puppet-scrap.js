@@ -46,7 +46,7 @@ import { existsSync } from 'fs';
   }
   
 
-  console.log(chalk.bgYellow.bold("Starting Puppet Scraper"))
+  console.log(chalk.bgYellow.bold("Starting Puppet Scrap"))
   console.log(chalk.yellow(`===========================================`))
   console.log(chalk.yellow(` - Script:       ${options.script}`))
   console.log(chalk.yellow(` - Dataset:      ${options.dataset}`))
