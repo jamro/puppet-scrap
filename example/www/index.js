@@ -27,6 +27,8 @@ console.log(JSON.stringify(db, null, 2))
 
 app.get('/', (req, res) => {
   let content = '<h1>Welcome to the Store!</h1><ul>'
+  content += `<li><a href="/product/err_404">Incorrect data: Not existing (404)</a></li>`
+  content += `<li><a href="/product/err_empty">Incorrect data: Empty</a></li>`
   content += db.products.map(product => (`
     <li>
       <a href="/product/${product.id}">${product.name}</a>
@@ -38,6 +40,12 @@ app.get('/', (req, res) => {
 
 app.get('/product/:id', (req, res) => {
   const product = db.products.find(p => p.id === req.params.id)
+  if (req.params.id === 'err_empty') {
+    return res.send(`<h1>Empty item</h1>`)
+  }
+  if(!product) {
+    return res.status(404).send("404 Not Found")
+  }
   let content = `<h1>${product.name}</h1>
     <ul>
       <li><strong>Name:</strong> ${product.name}</li>

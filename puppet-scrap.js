@@ -77,7 +77,9 @@ import { existsSync } from 'fs';
   dataset = JSON.parse(dataset)
   const scriptPath = path.resolve(options.script)
   console.log("Loading script from " + scriptPath)
-  const script = (await import(scriptPath)).default
+  const scriptLib = await import(scriptPath)
+  const script = scriptLib.default
+  const postProcess = scriptLib.postProcess || ((d) => d)
 
   console.log(chalk.bgGreen("\nQuery dataset"))
   const dataPoints = jsonpath.query(dataset, options.query)
@@ -133,6 +135,11 @@ import { existsSync } from 'fs';
   await browser.close();
   if(progress >= dataPoints.length) {
     await unlink(progressPath)
+    dataset = await postProcess(dataset)
+    const jsonOptions = options.pretty ? [null, 2] : []
+    const raw = JSON.stringify(dataset, ...jsonOptions)
+    console.log(`Writing to ${outputPath}` )
+    writeFile(outputPath, raw)
   }
 
   console.log(chalk.yellow("\nThe job is done. Bye!"))
