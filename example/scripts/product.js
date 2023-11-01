@@ -7,7 +7,6 @@ export default async function (page, dataset) {
    }
 }
 
-
 async function scrap(page, dataset) {
   // open url
   const response = await page.goto(dataset.url);

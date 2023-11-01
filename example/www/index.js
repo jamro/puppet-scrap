@@ -14,7 +14,7 @@ db.sellers = Array(5).fill(0).map(() => ({
   location: faker.location.street(),
   phone: faker.phone.number()
 }))
-db.products = Array(30).fill(0).map(() => ({
+db.products = Array(100).fill(0).map(() => ({
   id: faker.database.mongodbObjectId(),
   name: faker.commerce.productName(),
   description: faker.commerce.productDescription(),
@@ -55,7 +55,8 @@ app.get('/product/:id', (req, res) => {
       <li><strong>Seller:</strong> <a href="/seller/${product.seller.id}">${product.seller.name}</a></li>
     </ul>
   `
-  res.send(content)
+  
+  setTimeout(() => res.send(content), 100)
 })
 
 app.get('/seller/:id', (req, res) => {

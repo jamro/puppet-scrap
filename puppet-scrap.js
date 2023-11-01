@@ -8,6 +8,18 @@ import path from 'path'
 import jsonpath from 'jsonpath'
 import { existsSync } from 'fs';
 
+
+function formatTimeLeft(sec) {
+  if(sec === null) return '???'
+  let t = Math.round(sec)
+  let s = t % 60
+  t = (t - s)/60
+  let m = t % 60
+  t = (t - m)/60
+  let h = t
+  return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
+}
+
 (async () => {
   program
     .requiredOption('-d, --dataset <path>', 'Path to JSON file with the dataset.')
@@ -90,10 +102,19 @@ import { existsSync } from 'fs';
   const browser = await puppeteer.launch({headless: "new"});
 
   const initProgress = progress
+  let sampleCount = 0
+  let sampleTime = 0
+  let sampleStart
   for(let i=initProgress; i < dataPoints.length && i < (initProgress + Number(limit)); i++) {
     const dataPoint = dataPoints[i]
-    console.log(chalk.bgGreen(`\nScraping the web (${i+1}/${dataPoints.length})`))
+    let timeLeft = null
+    if(sampleCount >= 5) {
+      const avgSampleTime = sampleCount ? (sampleTime/sampleCount) : 0
+      timeLeft = avgSampleTime * (dataPoints.length-i)
+    }
+    console.log(chalk.bgGreen(`\nScraping the web (${i+1}/${dataPoints.length}). Time left: ${formatTimeLeft(timeLeft)}`))
     if(!(options.dryrun)) {
+      sampleStart = performance.now()
       await new Promise(done => setTimeout(done, Number(options.delay)))
       console.log("Opening new browser tab")
       const page = await browser.newPage();
@@ -119,6 +140,8 @@ import { existsSync } from 'fs';
       writeFile(progressPath, JSON.stringify({step: progress}))
 
       console.log(newDataPoint)
+      sampleCount++
+      sampleTime += (performance.now() - sampleStart)/1000
 
     } else {
       console.log("Entry data:")
