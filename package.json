@@ -1,6 +1,6 @@
 {
   "name": "puppet-scrap",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "description": "",
   "main": "puppet-scrap.js",
@@ -24,9 +24,9 @@
   "dependencies": {
     "chalk": "^5.3.0",
     "commander": "^11.0.0",
-    "conf": "^11.0.2",
+    "conf": "^12.0.0",
     "jsonpath": "^1.1.1",
-    "puppeteer": "^20.9.0"
+    "puppeteer": "^21.4.1"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",

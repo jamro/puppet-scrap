@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
 
 app.get('/product/:id', (req, res) => {
 
-  if(Math.random() > 0.9) {
+  if(Math.random() > 0.95) {
     return res.status(500).send('Oops! Not this time!')
   }
 
