@@ -1,20 +1,7 @@
-export default async function (page, dataset) {
-  try {
-    return await scrap(page, dataset)
-   } catch (err) {
-    console.warn(err)
-    return null // skip incorrect element
-   }
-}
-
-async function scrap(page, dataset) {
+export default async function scrap(page, dataset) {
   // open url
-  const response = await page.goto(dataset.url);
+  await page.goto(dataset.url);
 
-  // skip if page not found
-  if(!response.ok()) {
-    return null // skip incorrect element
-  }
   await page.waitForSelector('li', {timeout: 1000})
 
   const details = await page.evaluate(e => {

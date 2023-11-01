@@ -20,6 +20,13 @@ function formatTimeLeft(sec) {
   return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
 }
 
+async function waitForRetry(sec) {
+  for(let i=sec; i >= 0; i--) {
+    await new Promise(done => setTimeout(done, 1000))
+    console.log(`Retry in ${formatTimeLeft(i)}...`)
+  }
+}
+
 (async () => {
   program
     .requiredOption('-d, --dataset <path>', 'Path to JSON file with the dataset.')
@@ -28,6 +35,7 @@ function formatTimeLeft(sec) {
     .requiredOption('-q, --query <jsonPath>', 'path to elements in datapath', '$')
     .option('-p, --pretty', 'Store dataset in pretty JSON format')
     .option('-t, --dryrun', 'Run JSON Path query without actual scraping')
+    .option('-r, --retry', 'Retry scraping on fail')
     .requiredOption('-w, --delay', 'Delay in ms before each item scrap', 500)
     .requiredOption('-l, --limit <int>', 'maximum number of items to scrap', Number.MAX_VALUE)
 
@@ -60,14 +68,15 @@ function formatTimeLeft(sec) {
 
   console.log(chalk.bgYellow.bold("Starting Puppet Scrap"))
   console.log(chalk.yellow(`===========================================`))
-  console.log(chalk.yellow(` - Script:       ${options.script}`))
-  console.log(chalk.yellow(` - Dataset:      ${options.dataset}`))
-  console.log(chalk.yellow(` - Output:       ${outputLocation}`))
-  console.log(chalk.yellow(` - Query:        ${options.query}`))
-  console.log(chalk.yellow(` - Limit:        ${limit === Number.MAX_VALUE ? "Off" : limit}`))
-  console.log(chalk.yellow(` - Delay:        ${options.delay}ms`))
-  console.log(chalk.yellow(` - Pretty:       ${options.pretty ? 'On' : 'Off'}`))
-  console.log(chalk.yellow(` - Dry Run:      ${options.dryrun ? 'On' : 'Off'}`))
+  console.log(chalk.yellow(` - Script:        ${options.script}`))
+  console.log(chalk.yellow(` - Dataset:       ${options.dataset}`))
+  console.log(chalk.yellow(` - Output:        ${outputLocation}`))
+  console.log(chalk.yellow(` - Query:         ${options.query}`))
+  console.log(chalk.yellow(` - Limit:         ${limit === Number.MAX_VALUE ? "Off" : limit}`))
+  console.log(chalk.yellow(` - Delay:         ${options.delay}ms`))
+  console.log(chalk.yellow(` - Pretty:        ${options.pretty ? 'On' : 'Off'}`))
+  console.log(chalk.yellow(` - Dry Run:       ${options.dryrun ? 'On' : 'Off'}`))
+  console.log(chalk.yellow(` - Retry on fail: ${options.retry ? 'On' : 'Off'}`))
   console.log(chalk.yellow(`===========================================`))
   
 
@@ -120,7 +129,22 @@ function formatTimeLeft(sec) {
       const page = await browser.newPage();
 
       console.log("Parsing page data")
-      const newDataPoint = await script(page, dataPoint)
+      let newDataPoint = null
+      while(newDataPoint === null) {
+        try {
+          newDataPoint = await script(page, dataPoint)
+        } catch(err) {
+          console.error('Error: Unable to scrap')
+          console.error(err)
+          if(!options.retry) {
+            throw err
+            break;
+          } else {
+            await waitForRetry(10)
+          }
+        }
+      }
+
 
       jsonpath.apply(dataset, subQueries[i], (v) => {
         return newDataPoint
