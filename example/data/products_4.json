@@ -1,0 +1,557 @@
+[
+  {
+    "url": "http://localhost:3456",
+    "products": [
+      {
+        "name": "Small Plastic Computer",
+        "url": "http://localhost:3456/product/0ba09ab0ced69b3b2daaefcf",
+        "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+        "price": "418.00",
+        "stock": "88",
+        "seller": {
+          "name": "Pagac LLC",
+          "url": "http://localhost:3456/seller/1504c9be779e3b9ef0a87ba5",
+          "location": "Dickens Streets",
+          "phone": "(837) 519-4918"
+        }
+      },
+      {
+        "name": "Modern Concrete Sausages",
+        "url": "http://localhost:3456/product/c3f1b23fe1b4c796cf9432d5",
+        "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+        "price": "690.00",
+        "stock": "92",
+        "seller": {
+          "name": "Pagac LLC",
+          "url": "http://localhost:3456/seller/1504c9be779e3b9ef0a87ba5",
+          "location": "Dickens Streets",
+          "phone": "(837) 519-4918"
+        }
+      },
+      {
+        "name": "Sleek Concrete Bacon",
+        "url": "http://localhost:3456/product/7f1a3806ddbd5ed3a6e7e48c",
+        "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+        "price": "584.00",
+        "stock": "88",
+        "seller": {
+          "name": "Wiza, Deckow and Metz",
+          "url": "http://localhost:3456/seller/fa5cf5c4ebeaa1aecd9c1c95",
+          "location": "N Franklin Street",
+          "phone": "617.631.3671 x51813"
+        }
+      },
+      {
+        "name": "Rustic Plastic Chips",
+        "url": "http://localhost:3456/product/eefc8815eee4cce67d346da9",
+        "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+        "price": "436.00",
+        "stock": "75",
+        "seller": {
+          "name": "Wiza, Deckow and Metz",
+          "url": "http://localhost:3456/seller/fa5cf5c4ebeaa1aecd9c1c95",
+          "location": "N Franklin Street",
+          "phone": "617.631.3671 x51813"
+        }
+      },
+      {
+        "name": "Refined Soft Salad",
+        "url": "http://localhost:3456/product/2f33fd6f9e32de1f18aead78",
+        "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+        "price": "970.00",
+        "stock": "2",
+        "seller": {
+          "name": "Keebler - Stamm",
+          "url": "http://localhost:3456/seller/d27ee337f4fffd8deed94eab",
+          "location": "Beach Road",
+          "phone": "1-556-891-2788 x4688"
+        }
+      },
+      {
+        "name": "Luxurious Concrete Shirt",
+        "url": "http://localhost:3456/product/c90d5fc4c4ba9f6ba70f5f1f",
+        "description": "The Football Is Good For Training And Recreational Purposes",
+        "price": "418.00",
+        "stock": "8",
+        "seller": {
+          "name": "McKenzie - Ferry",
+          "url": "http://localhost:3456/seller/46cdd92e5b8548c5fdf7b647",
+          "location": "S 10th Street",
+          "phone": "833-784-4806 x192"
+        }
+      },
+      {
+        "name": "Modern Granite Hat",
+        "url": "http://localhost:3456/product/eca9c2c32dedfb6fedf0cbd6",
+        "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+        "price": "360.00",
+        "stock": "97",
+        "seller": {
+          "name": "Keebler - Stamm",
+          "url": "http://localhost:3456/seller/d27ee337f4fffd8deed94eab",
+          "location": "Beach Road",
+          "phone": "1-556-891-2788 x4688"
+        }
+      },
+      {
+        "name": "Licensed Steel Pizza",
+        "url": "http://localhost:3456/product/15e050d266eacd2dfacfdbd0",
+        "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+        "price": "577.00",
+        "stock": "8",
+        "seller": {
+          "name": "Pagac LLC",
+          "url": "http://localhost:3456/seller/1504c9be779e3b9ef0a87ba5",
+          "location": "Dickens Streets",
+          "phone": "(837) 519-4918"
+        }
+      },
+      {
+        "name": "Handmade Soft Bacon",
+        "url": "http://localhost:3456/product/efdfad18a0cef87decd2fd6f",
+        "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+        "price": "96.00",
+        "stock": "49",
+        "seller": {
+          "name": "Lubowitz, Bahringer and Brown",
+          "url": "http://localhost:3456/seller/32c1bdb0a847d1bf0584effa",
+          "location": "Geovanni Estate",
+          "phone": "(894) 485-9301 x651"
+        }
+      },
+      {
+        "name": "Elegant Cotton Chair",
+        "url": "http://localhost:3456/product/a8c5fedd87babbaccbd67ab5",
+        "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+        "price": "46.00",
+        "stock": "82",
+        "seller": {
+          "name": "Keebler - Stamm",
+          "url": "http://localhost:3456/seller/d27ee337f4fffd8deed94eab",
+          "location": "Beach Road",
+          "phone": "1-556-891-2788 x4688"
+        }
+      },
+      {
+        "name": "Modern Concrete Salad",
+        "url": "http://localhost:3456/product/351c8579d1a9a078a7716cd4",
+        "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+        "price": "383.00",
+        "stock": "59",
+        "seller": {
+          "name": "Pagac LLC",
+          "url": "http://localhost:3456/seller/1504c9be779e3b9ef0a87ba5",
+          "location": "Dickens Streets",
+          "phone": "(837) 519-4918"
+        }
+      },
+      {
+        "name": "Sleek Fresh Fish",
+        "url": "http://localhost:3456/product/e2aeedcac994297782a2de70",
+        "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+        "price": "753.00",
+        "stock": "78",
+        "seller": {
+          "name": "Keebler - Stamm",
+          "url": "http://localhost:3456/seller/d27ee337f4fffd8deed94eab",
+          "location": "Beach Road",
+          "phone": "1-556-891-2788 x4688"
+        }
+      },
+      {
+        "name": "Generic Frozen Car",
+        "url": "http://localhost:3456/product/1e9bcdaca305b7fd36fa46a7",
+        "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+        "price": "782.00",
+        "stock": "75",
+        "seller": {
+          "name": "Wiza, Deckow and Metz",
+          "url": "http://localhost:3456/seller/fa5cf5c4ebeaa1aecd9c1c95"
+        }
+      },
+      {
+        "name": "Refined Metal Tuna",
+        "url": "http://localhost:3456/product/a0beb848a8c6ca9f493364e2",
+        "description": "The Football Is Good For Training And Recreational Purposes",
+        "price": "993.00",
+        "stock": "32",
+        "seller": {
+          "name": "Pagac LLC",
+          "url": "http://localhost:3456/seller/1504c9be779e3b9ef0a87ba5"
+        }
+      },
+      {
+        "name": "Intelligent Cotton Tuna",
+        "url": "http://localhost:3456/product/de29aca2f9c4fbca0765a44d",
+        "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+        "price": "303.00",
+        "stock": "81",
+        "seller": {
+          "name": "McKenzie - Ferry",
+          "url": "http://localhost:3456/seller/46cdd92e5b8548c5fdf7b647"
+        }
+      },
+      {
+        "name": "Gorgeous Plastic Fish",
+        "url": "http://localhost:3456/product/178fdefd2bd6fd1e6347e0d2",
+        "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+        "price": "860.00",
+        "stock": "21",
+        "seller": {
+          "name": "Wiza, Deckow and Metz",
+          "url": "http://localhost:3456/seller/fa5cf5c4ebeaa1aecd9c1c95"
+        }
+      },
+      {
+        "name": "Gorgeous Concrete Pizza",
+        "url": "http://localhost:3456/product/9ed7a76d3a0abe2b232c4414",
+        "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+        "price": "209.00",
+        "stock": "42",
+        "seller": {
+          "name": "Keebler - Stamm",
+          "url": "http://localhost:3456/seller/d27ee337f4fffd8deed94eab"
+        }
+      },
+      {
+        "name": "Handcrafted Metal Salad",
+        "url": "http://localhost:3456/product/ec51d5b278de594ab9f7f184",
+        "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+        "price": "928.00",
+        "stock": "25",
+        "seller": {
+          "name": "Keebler - Stamm",
+          "url": "http://localhost:3456/seller/d27ee337f4fffd8deed94eab"
+        }
+      },
+      {
+        "name": "Licensed Concrete Fish",
+        "url": "http://localhost:3456/product/6a8fc91aaa9b04f9afb10fbb"
+      },
+      {
+        "name": "Luxurious Soft Bike",
+        "url": "http://localhost:3456/product/f2d1cee5def3835f90dbe0be"
+      },
+      {
+        "name": "Intelligent Fresh Sausages",
+        "url": "http://localhost:3456/product/ee4cb90b367890bc1dfcd92f"
+      },
+      {
+        "name": "Ergonomic Concrete Chair",
+        "url": "http://localhost:3456/product/2abada922ed87caf62cae980"
+      },
+      {
+        "name": "Practical Wooden Computer",
+        "url": "http://localhost:3456/product/7d3c1bf4acb4cface45e1bb6"
+      },
+      {
+        "name": "Licensed Bronze Fish",
+        "url": "http://localhost:3456/product/fc42b82af11becd3c66afd5c"
+      },
+      {
+        "name": "Unbranded Frozen Shirt",
+        "url": "http://localhost:3456/product/fb66dffa0e0cf2e0caffdc27"
+      },
+      {
+        "name": "Electronic Metal Soap",
+        "url": "http://localhost:3456/product/d42ab065e627577c4baa3f85"
+      },
+      {
+        "name": "Licensed Cotton Bike",
+        "url": "http://localhost:3456/product/2a137abdcfcba71d5ef9b986"
+      },
+      {
+        "name": "Rustic Plastic Car",
+        "url": "http://localhost:3456/product/059bf9babd637966eb3d0eef"
+      },
+      {
+        "name": "Luxurious Fresh Pizza",
+        "url": "http://localhost:3456/product/ad2a205d49b6a15843afeded"
+      },
+      {
+        "name": "Practical Rubber Towels",
+        "url": "http://localhost:3456/product/a3e59ceab79ae83af14235a4"
+      },
+      {
+        "name": "Sleek Plastic Pizza",
+        "url": "http://localhost:3456/product/f5fd6cbe5e01dbcebab06c9e"
+      },
+      {
+        "name": "Generic Granite Mouse",
+        "url": "http://localhost:3456/product/3b3ca5eacca8da9a3fdba0fd"
+      },
+      {
+        "name": "Ergonomic Plastic Gloves",
+        "url": "http://localhost:3456/product/23abfb780fdf83d2ffa4f4ce"
+      },
+      {
+        "name": "Practical Steel Computer",
+        "url": "http://localhost:3456/product/003c35263d2c5871c946ee18"
+      },
+      {
+        "name": "Sleek Cotton Table",
+        "url": "http://localhost:3456/product/defdfa0dcacabbfb8b9e0b7a"
+      },
+      {
+        "name": "Unbranded Soft Fish",
+        "url": "http://localhost:3456/product/5eee1263c1637dd268f0c269"
+      },
+      {
+        "name": "Luxurious Steel Tuna",
+        "url": "http://localhost:3456/product/def5aca5df706e6eedefbbc1"
+      },
+      {
+        "name": "Gorgeous Steel Pizza",
+        "url": "http://localhost:3456/product/500cdbace11a0ce5fc412dea"
+      },
+      {
+        "name": "Rustic Metal Bike",
+        "url": "http://localhost:3456/product/e76edbe52a3697704aaefea3"
+      },
+      {
+        "name": "Tasty Rubber Chicken",
+        "url": "http://localhost:3456/product/bb32311be6ed8d9d34bedd2f"
+      },
+      {
+        "name": "Recycled Bronze Towels",
+        "url": "http://localhost:3456/product/ea1ffb9f2faf44e1e9e31aa8"
+      },
+      {
+        "name": "Oriental Rubber Shirt",
+        "url": "http://localhost:3456/product/bf9a3ac9e58b3c4ff5aa68b6"
+      },
+      {
+        "name": "Elegant Soft Keyboard",
+        "url": "http://localhost:3456/product/cf2a1ab9cbf8fbb7de13879c"
+      },
+      {
+        "name": "Elegant Steel Fish",
+        "url": "http://localhost:3456/product/b14bf13dfd25d18933fdbd48"
+      },
+      {
+        "name": "Generic Rubber Chips",
+        "url": "http://localhost:3456/product/faae4ae94dfd3ad5397ed5cb"
+      },
+      {
+        "name": "Fantastic Rubber Gloves",
+        "url": "http://localhost:3456/product/bc8e591acd2cb67515f3fc75"
+      },
+      {
+        "name": "Electronic Cotton Computer",
+        "url": "http://localhost:3456/product/b7bb92aeeb8aa2de5228be29"
+      },
+      {
+        "name": "Refined Fresh Computer",
+        "url": "http://localhost:3456/product/dff2fc2b1ba87dd8447cd7e3"
+      },
+      {
+        "name": "Refined Metal Shirt",
+        "url": "http://localhost:3456/product/33c0fdfaf075e7e9b855eabd"
+      },
+      {
+        "name": "Electronic Rubber Cheese",
+        "url": "http://localhost:3456/product/cfe82ae164fc41deff6e9c37"
+      },
+      {
+        "name": "Tasty Fresh Car",
+        "url": "http://localhost:3456/product/b516e21b8cabca7ec52c4048"
+      },
+      {
+        "name": "Gorgeous Plastic Bike",
+        "url": "http://localhost:3456/product/c8aaecb9b0a1efe56fee9006"
+      },
+      {
+        "name": "Bespoke Soft Chips",
+        "url": "http://localhost:3456/product/4fbf1b1a13e0f6a64e6b9447"
+      },
+      {
+        "name": "Modern Frozen Chair",
+        "url": "http://localhost:3456/product/ab59897e4dada6d1f1bade99"
+      },
+      {
+        "name": "Intelligent Fresh Gloves",
+        "url": "http://localhost:3456/product/1fc1aabf42efa8fc4f5bf039"
+      },
+      {
+        "name": "Intelligent Bronze Soap",
+        "url": "http://localhost:3456/product/a7cfbfceeb6767f9f9c10173"
+      },
+      {
+        "name": "Modern Soft Car",
+        "url": "http://localhost:3456/product/d4e71de9cb6eb3edbf3a93b3"
+      },
+      {
+        "name": "Gorgeous Plastic Computer",
+        "url": "http://localhost:3456/product/bf2b5dfda02ec3ca8f78a970"
+      },
+      {
+        "name": "Electronic Granite Ball",
+        "url": "http://localhost:3456/product/1f8cb0978b00d05489848ff3"
+      },
+      {
+        "name": "Licensed Soft Salad",
+        "url": "http://localhost:3456/product/aa8b95d18bdf80ccfef33151"
+      },
+      {
+        "name": "Rustic Granite Bacon",
+        "url": "http://localhost:3456/product/854fe18388eddd6d1d4a5d8e"
+      },
+      {
+        "name": "Gorgeous Soft Soap",
+        "url": "http://localhost:3456/product/11b2c0dbf5eef3dcbfca21ed"
+      },
+      {
+        "name": "Incredible Plastic Shoes",
+        "url": "http://localhost:3456/product/8ba7c31dd4aad16ccce3bacf"
+      },
+      {
+        "name": "Gorgeous Plastic Sausages",
+        "url": "http://localhost:3456/product/1affdbc1cac6e7f4d4c34fc2"
+      },
+      {
+        "name": "Modern Soft Computer",
+        "url": "http://localhost:3456/product/c5b830fddb280cb25c42fe68"
+      },
+      {
+        "name": "Licensed Wooden Keyboard",
+        "url": "http://localhost:3456/product/ab1d42af8a18eded0aeb6cd3"
+      },
+      {
+        "name": "Recycled Granite Cheese",
+        "url": "http://localhost:3456/product/daa6f32f3e95a8b86d3aacc9"
+      },
+      {
+        "name": "Refined Cotton Chicken",
+        "url": "http://localhost:3456/product/b22fe91bbcc8536e17ac737c"
+      },
+      {
+        "name": "Incredible Bronze Mouse",
+        "url": "http://localhost:3456/product/58ee4a84cf44b04bfea6cb50"
+      },
+      {
+        "name": "Practical Cotton Shoes",
+        "url": "http://localhost:3456/product/7b288f6ff0e62bcdfb6bc6fc"
+      },
+      {
+        "name": "Awesome Rubber Bacon",
+        "url": "http://localhost:3456/product/afec1eb7ebb1d1dfda7d1abd"
+      },
+      {
+        "name": "Handmade Cotton Keyboard",
+        "url": "http://localhost:3456/product/d3085d11f78bf4cd5d3ddf30"
+      },
+      {
+        "name": "Elegant Cotton Chicken",
+        "url": "http://localhost:3456/product/bfba5c9ccbd613f1ab8d48b9"
+      },
+      {
+        "name": "Refined Steel Computer",
+        "url": "http://localhost:3456/product/4eb6c7d26dfcfbe3ffcb7e22"
+      },
+      {
+        "name": "Unbranded Granite Shirt",
+        "url": "http://localhost:3456/product/cfdf5fbcebf02eb026344daa"
+      },
+      {
+        "name": "Recycled Cotton Fish",
+        "url": "http://localhost:3456/product/7c71aadc9b0c7c974c0c6fe5"
+      },
+      {
+        "name": "Elegant Steel Car",
+        "url": "http://localhost:3456/product/e4c0abedd25a162afea07acc"
+      },
+      {
+        "name": "Handmade Cotton Cheese",
+        "url": "http://localhost:3456/product/32e2cf6cb2943fa2e3cec24c"
+      },
+      {
+        "name": "Elegant Metal Salad",
+        "url": "http://localhost:3456/product/80da3bc1cb5937bd7ea9effe"
+      },
+      {
+        "name": "Oriental Fresh Shirt",
+        "url": "http://localhost:3456/product/916b1e1189c950644eda5a2a"
+      },
+      {
+        "name": "Small Steel Sausages",
+        "url": "http://localhost:3456/product/da31c50f83d3ef87d64dcf3e"
+      },
+      {
+        "name": "Awesome Steel Tuna",
+        "url": "http://localhost:3456/product/cfd4dd2ae27f26ae1c71f3da"
+      },
+      {
+        "name": "Handmade Rubber Fish",
+        "url": "http://localhost:3456/product/0a89b766e9820a104d55613a"
+      },
+      {
+        "name": "Rustic Frozen Shirt",
+        "url": "http://localhost:3456/product/7bf1ca511ae7f9440f1999aa"
+      },
+      {
+        "name": "Refined Bronze Pizza",
+        "url": "http://localhost:3456/product/beab5acc800d6d2feadf9be4"
+      },
+      {
+        "name": "Recycled Soft Bike",
+        "url": "http://localhost:3456/product/a7afb9cc9b4a69ac1db5f2e8"
+      },
+      {
+        "name": "Licensed Metal Sausages",
+        "url": "http://localhost:3456/product/e4b1c452c5ddf5f01b0fe4c5"
+      },
+      {
+        "name": "Small Metal Salad",
+        "url": "http://localhost:3456/product/b7e98c7e9c49b2afd7cacaf0"
+      },
+      {
+        "name": "Handcrafted Plastic Keyboard",
+        "url": "http://localhost:3456/product/32b2bf1fcde64ec4d6a8fbed"
+      },
+      {
+        "name": "Modern Metal Mouse",
+        "url": "http://localhost:3456/product/4b177fccdc92eca2613e0ae4"
+      },
+      {
+        "name": "Unbranded Bronze Towels",
+        "url": "http://localhost:3456/product/1b2fc0fddbab0b5bca9ecbf7"
+      },
+      {
+        "name": "Unbranded Concrete Ball",
+        "url": "http://localhost:3456/product/7540daf16a173bf326ea346c"
+      },
+      {
+        "name": "Rustic Steel Keyboard",
+        "url": "http://localhost:3456/product/2f4806bffc7a49c44efeff1b"
+      },
+      {
+        "name": "Incredible Concrete Shoes",
+        "url": "http://localhost:3456/product/2defe0b859177c3a3fabc12a"
+      },
+      {
+        "name": "Ergonomic Rubber Mouse",
+        "url": "http://localhost:3456/product/eeb349afd19c1fa035c092c9"
+      },
+      {
+        "name": "Modern Frozen Mouse",
+        "url": "http://localhost:3456/product/f01064bba1f569f02bbb9cb5"
+      },
+      {
+        "name": "Luxurious Soft Gloves",
+        "url": "http://localhost:3456/product/9b2f3db252339c35e01757b2"
+      },
+      {
+        "name": "Handcrafted Bronze Keyboard",
+        "url": "http://localhost:3456/product/d5f39d5fee7ef52c5e5cced6"
+      },
+      {
+        "name": "Bespoke Metal Shoes",
+        "url": "http://localhost:3456/product/9f26ea7b30647bafd0fffd6a"
+      },
+      {
+        "name": "Tasty Concrete Towels",
+        "url": "http://localhost:3456/product/4d4cd881ecafaddf79b4b8fb"
+      }
+    ]
+  }
+]

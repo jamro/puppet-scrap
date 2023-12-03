@@ -52,7 +52,7 @@ async function waitForRetry(sec) {
 }
 
 
-export default async function(options) {
+export default async function(options={}) {
   fillOptions(options)
 
   const limit = options.limit
