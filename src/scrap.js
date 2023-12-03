@@ -1,9 +1,10 @@
 import puppeteer from 'puppeteer';
-import { readFile, unlink, writeFile } from "fs/promises";
+import fsAsync from "fs/promises";
 import chalk from 'chalk';
 import path from 'path'
 import jsonpath from 'jsonpath'
-import { existsSync } from 'fs';
+import fs from 'fs';
+import loadScript from './loadScript.js';
 
 export const defaultScrapperOptions = {
   limit: Number.MAX_VALUE,
@@ -13,6 +14,7 @@ export const defaultScrapperOptions = {
   pretty: false,
   dryrun: false,
   retry: false,
+  silent: false,
 }
 
 function fillOptions(options) {
@@ -44,22 +46,54 @@ function formatTimeLeft(sec) {
   return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
 }
 
-async function waitForRetry(sec) {
+async function waitForRetry(sec, logger) {
   for(let i=sec; i >= 0; i--) {
     await new Promise(done => setTimeout(done, 1000))
-    console.log(`Retry in ${formatTimeLeft(i)}...`)
+    logger.log(`Retry in ${formatTimeLeft(i)}...`)
   }
 }
 
+function getLibs(dependencies) {
+  const libs = {}
+  const defaultLibs = {fsAsync, fs, loadScript, console}
 
-export default async function(options={}) {
+  const keys = Object.keys(defaultLibs)
+  for (let key of keys) {
+    if(dependencies[key]) {
+      libs[`_${key}`] = dependencies[key]
+    } else {
+      libs[`_${key}`] = defaultLibs[key]
+    }
+  }
+  return libs
+}
+
+
+export default async function(options={}, dependencies={}) {
   fillOptions(options)
+  const {
+    _fsAsync, 
+    _fs,
+    _loadScript,
+    _console
+  } = getLibs(dependencies)
 
   const limit = options.limit
   const dataPath = path.resolve(options.dataset)
   const workdir = path.dirname(dataPath)
   const projectName = path.basename(options.script, path.extname(options.script))
   const progressPath = path.resolve(workdir, `.${projectName}.progress.json`)
+  let logger
+  if(options.silent) {
+    logger = Object.keys(console)
+              .filter(k => typeof(console[k]) == 'function')
+              .reduce((mock, key) => {
+                mock[key] = () => {}; 
+                return mock;
+              }, {})
+  } else {
+    logger = _console
+  }
   let outputLocation
   if(options.output) {
     outputLocation = options.output
@@ -69,57 +103,62 @@ export default async function(options={}) {
   const outputPath = path.resolve(outputLocation)
 
   async function getProgress() {
-    console.log(progressPath)
-    if(!existsSync(progressPath)) {
+    logger.log(progressPath)
+    if(!_fs.existsSync(progressPath)) {
       return 0
     }
-    const raw = await readFile(progressPath)
+    const raw = await _fsAsync.readFile(progressPath)
     const json = JSON.parse(raw)
     return json.step
   }
 
-  console.log(chalk.bgYellow.bold("Starting Puppet Scrap"))
-  console.log(chalk.yellow(`===========================================`))
-  console.log(chalk.yellow(` - Script:        ${options.script}`))
-  console.log(chalk.yellow(` - Dataset:       ${options.dataset}`))
-  console.log(chalk.yellow(` - Output:        ${outputLocation}`))
-  console.log(chalk.yellow(` - Query:         ${options.query}`))
-  console.log(chalk.yellow(` - Limit:         ${limit === Number.MAX_VALUE ? "Off" : limit}`))
-  console.log(chalk.yellow(` - Delay:         ${options.delay}ms`))
-  console.log(chalk.yellow(` - Pretty:        ${options.pretty ? 'On' : 'Off'}`))
-  console.log(chalk.yellow(` - Dry Run:       ${options.dryrun ? 'On' : 'Off'}`))
-  console.log(chalk.yellow(` - Retry on fail: ${options.retry ? 'On' : 'Off'}`))
-  console.log(chalk.yellow(`===========================================`))
+  logger.log(chalk.bgYellow.bold("Starting Puppet Scrap"))
+  logger.log(chalk.yellow(`===========================================`))
+  logger.log(chalk.yellow(` - Script:        ${options.script}`))
+  logger.log(chalk.yellow(` - Dataset:       ${options.dataset}`))
+  logger.log(chalk.yellow(` - Output:        ${outputLocation}`))
+  logger.log(chalk.yellow(` - Query:         ${options.query}`))
+  logger.log(chalk.yellow(` - Limit:         ${limit === Number.MAX_VALUE ? "Off" : limit}`))
+  logger.log(chalk.yellow(` - Delay:         ${options.delay}ms`))
+  logger.log(chalk.yellow(` - Pretty:        ${options.pretty ? 'On' : 'Off'}`))
+  logger.log(chalk.yellow(` - Dry Run:       ${options.dryrun ? 'On' : 'Off'}`))
+  logger.log(chalk.yellow(` - Retry on fail: ${options.retry ? 'On' : 'Off'}`))
+  logger.log(chalk.yellow(`===========================================`))
 
 
-  console.log(chalk.bgGreen("\nEnvironment Setup"))
+  logger.log(chalk.bgGreen("\nEnvironment Setup"))
   let progress = await getProgress()
-  console.log("Current task progress: " + progress)
+  logger.log("Current task progress: " + progress)
 
   // reading dataset and scripts
-  console.log(chalk.bgGreen(`\nReading dataset`))
+  logger.log(chalk.bgGreen(`\nReading dataset`))
   let dataset
   if(progress === 0) {
-    console.log(`data source: ${dataPath}`)
-    dataset = await readFile(dataPath, 'utf8')
+    logger.log(`data source: ${dataPath}`)
+    try {
+      dataset = await _fsAsync.readFile(dataPath, 'utf8')
+    } catch(err) {
+      logger.error(err)
+      throw new Error(`Unable to read data source ${dataPath}. Reason: ${String(err)}`)
+    }
   } else {
-    console.log(`restoring data source: ${dataPath}`)
-    dataset = await readFile(outputPath, 'utf8')
+    logger.log(`restoring data source: ${dataPath}`)
+    dataset = await _fsAsync.readFile(outputPath, 'utf8')
   }
-  console.log("Parsing dataset...")
+  logger.log("Parsing dataset...")
   dataset = JSON.parse(dataset)
   const scriptPath = path.resolve(options.script)
-  console.log("Loading script from " + scriptPath)
-  const scriptLib = await import(scriptPath)
+  logger.log("Loading script from " + scriptPath)
+  const scriptLib = await _loadScript(scriptPath)
   const script = scriptLib.default
   const postProcess = scriptLib.postProcess || ((d) => d)
 
-  console.log(chalk.bgGreen("\nQuery dataset"))
+  logger.log(chalk.bgGreen("\nQuery dataset"))
   const dataPoints = jsonpath.query(dataset, options.query)
   const subQueries = jsonpath.paths(dataset, options.query).map(p => jsonpath.stringify(p))
-  console.log("Data points found: " + dataPoints.length)
+  logger.log("Data points found: " + dataPoints.length)
 
-  console.log("Launching headless Chrome")
+  logger.log("Launching headless Chrome")
   const browser = await puppeteer.launch({headless: "new"});
 
   const initProgress = progress
@@ -133,74 +172,73 @@ export default async function(options={}) {
       const avgSampleTime = sampleCount ? (sampleTime/sampleCount) : 0
       timeLeft = avgSampleTime * (dataPoints.length-i)
     }
-    console.log(chalk.bgGreen(`\nScraping the web (${i+1}/${dataPoints.length}). Time left: ${formatTimeLeft(timeLeft)}`))
+    logger.log(chalk.bgGreen(`\nScraping the web (${i+1}/${dataPoints.length}). Time left: ${formatTimeLeft(timeLeft)}`))
     if(!(options.dryrun)) {
       sampleStart = performance.now()
       await new Promise(done => setTimeout(done, Number(options.delay)))
-      console.log("Opening new browser tab")
+      logger.log("Opening new browser tab")
       const page = await browser.newPage();
 
-      console.log("Parsing page data")
+      logger.log("Parsing page data")
       let newDataPoint = null
       while(newDataPoint === null) {
         try {
           newDataPoint = await script(page, dataPoint)
         } catch(err) {
-          console.error('Error: Unable to scrap')
-          console.error(err)
+          logger.error('Error: Unable to scrap')
+          logger.error(err)
           if(!options.retry) {
             throw err
             break;
           } else {
-            await waitForRetry(10)
+            await waitForRetry(10, logger)
           }
         }
       }
-
 
       jsonpath.apply(dataset, subQueries[i], (v) => {
         return newDataPoint
       })
 
-      console.log("Closing browser tab")
+      logger.log("Closing browser tab")
       await page.close();
 
-      console.log(`Data serialization...`)
+      logger.log(`Data serialization...`)
       const jsonOptions = options.pretty ? [null, 2] : []
       const raw = JSON.stringify(dataset, ...jsonOptions)
-      console.log(`Writing to ${outputPath}` )
-      writeFile(outputPath, raw)
+      logger.log(`Writing to ${outputPath}` )
+      _fsAsync.writeFile(outputPath, raw)
 
       progress++
-      console.log("Update task progress: ", progress)
-      writeFile(progressPath, JSON.stringify({step: progress}))
+      logger.log("Update task progress: ", progress)
+      _fsAsync.writeFile(progressPath, JSON.stringify({step: progress}))
 
-      console.log(newDataPoint)
+      logger.log(newDataPoint)
       sampleCount++
       sampleTime += (performance.now() - sampleStart)/1000
 
     } else {
-      console.log("Entry data:")
-      console.log(dataPoint)
-      console.log("Dry Run Mode. Skip scraping")
+      logger.log("Entry data:")
+      logger.log(dataPoint)
+      logger.log("Dry Run Mode. Skip scraping")
     }
   }
 
-  console.log(chalk.bgGreen(`\nDataset`))
-  console.log(dataset)
+  logger.log(chalk.bgGreen(`\nDataset`))
+  logger.log(dataset)
 
-  console.log(chalk.bgGreen("\nEnvironment Cleanup"))
-  console.log("Closing headless Chrome")
+  logger.log(chalk.bgGreen("\nEnvironment Cleanup"))
+  logger.log("Closing headless Chrome")
   await browser.close();
   if(progress >= dataPoints.length) {
-    await unlink(progressPath)
+    await _fsAsync.unlink(progressPath)
     dataset = await postProcess(dataset)
     const jsonOptions = options.pretty ? [null, 2] : []
     const raw = JSON.stringify(dataset, ...jsonOptions)
-    console.log(`Writing to ${outputPath}` )
-    writeFile(outputPath, raw)
+    logger.log(`Writing to ${outputPath}` )
+    _fsAsync.writeFile(outputPath, raw)
   }
 
-  console.log(chalk.yellow("\nThe job is done. Bye!"))
+  logger.log(chalk.yellow("\nThe job is done. Bye!"))
 
 }
