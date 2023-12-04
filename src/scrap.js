@@ -12,7 +12,6 @@ export const defaultScrapperOptions = {
   query: '$',
   output: undefined,
   pretty: false,
-  dryrun: false,
   retry: false,
   silent: false,
 }
@@ -121,7 +120,6 @@ export default async function(options={}, dependencies={}) {
   logger.log(chalk.yellow(` - Limit:         ${limit === Number.MAX_VALUE ? "Off" : limit}`))
   logger.log(chalk.yellow(` - Delay:         ${options.delay}ms`))
   logger.log(chalk.yellow(` - Pretty:        ${options.pretty ? 'On' : 'Off'}`))
-  logger.log(chalk.yellow(` - Dry Run:       ${options.dryrun ? 'On' : 'Off'}`))
   logger.log(chalk.yellow(` - Retry on fail: ${options.retry ? 'On' : 'Off'}`))
   logger.log(chalk.yellow(`===========================================`))
 
@@ -173,55 +171,50 @@ export default async function(options={}, dependencies={}) {
       timeLeft = avgSampleTime * (dataPoints.length-i)
     }
     logger.log(chalk.bgGreen(`\nScraping the web (${i+1}/${dataPoints.length}). Time left: ${formatTimeLeft(timeLeft)}`))
-    if(!(options.dryrun)) {
-      sampleStart = performance.now()
-      await new Promise(done => setTimeout(done, Number(options.delay)))
-      logger.log("Opening new browser tab")
-      const page = await browser.newPage();
 
-      logger.log("Parsing page data")
-      let newDataPoint = null
-      while(newDataPoint === null) {
-        try {
-          newDataPoint = await script(page, dataPoint)
-        } catch(err) {
-          logger.error('Error: Unable to scrap')
-          logger.error(err)
-          if(!options.retry) {
-            throw err
-            break;
-          } else {
-            await waitForRetry(10, logger)
-          }
+    sampleStart = performance.now()
+    await new Promise(done => setTimeout(done, Number(options.delay)))
+    logger.log("Opening new browser tab")
+    const page = await browser.newPage();
+
+    logger.log("Parsing page data")
+    let newDataPoint = null
+    while(newDataPoint === null) {
+      try {
+        newDataPoint = await script(page, dataPoint)
+      } catch(err) {
+        logger.error('Error: Unable to scrap')
+        logger.error(err)
+        if(!options.retry) {
+          throw err
+          break;
+        } else {
+          await waitForRetry(10, logger)
         }
       }
-
-      jsonpath.apply(dataset, subQueries[i], (v) => {
-        return newDataPoint
-      })
-
-      logger.log("Closing browser tab")
-      await page.close();
-
-      logger.log(`Data serialization...`)
-      const jsonOptions = options.pretty ? [null, 2] : []
-      const raw = JSON.stringify(dataset, ...jsonOptions)
-      logger.log(`Writing to ${outputPath}` )
-      _fsAsync.writeFile(outputPath, raw)
-
-      progress++
-      logger.log("Update task progress: ", progress)
-      _fsAsync.writeFile(progressPath, JSON.stringify({step: progress}))
-
-      logger.log(newDataPoint)
-      sampleCount++
-      sampleTime += (performance.now() - sampleStart)/1000
-
-    } else {
-      logger.log("Entry data:")
-      logger.log(dataPoint)
-      logger.log("Dry Run Mode. Skip scraping")
     }
+
+    jsonpath.apply(dataset, subQueries[i], (v) => {
+      return newDataPoint
+    })
+
+    logger.log("Closing browser tab")
+    await page.close();
+
+    logger.log(`Data serialization...`)
+    const jsonOptions = options.pretty ? [null, 2] : []
+    const raw = JSON.stringify(dataset, ...jsonOptions)
+    logger.log(`Writing to ${outputPath}` )
+    _fsAsync.writeFile(outputPath, raw)
+
+    progress++
+    logger.log("Update task progress: ", progress)
+    _fsAsync.writeFile(progressPath, JSON.stringify({step: progress}))
+
+    logger.log(newDataPoint)
+    sampleCount++
+    sampleTime += (performance.now() - sampleStart)/1000
+
   }
 
   logger.log(chalk.bgGreen(`\nDataset`))

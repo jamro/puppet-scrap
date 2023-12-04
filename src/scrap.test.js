@@ -151,22 +151,5 @@ describe('scraping', () => {
     ])
   });
 
-  test('should run dryrun', async function() {
-    this.disk[path.resolve('test-73-input.json')] = {
-      content: JSON.stringify([ { "url": "http://example.com/test-0033"  } ])
-    }
-    const options = { 
-      dataset: 'test-73-input.json', 
-      script: 'script.js', 
-      query: '$[*]',
-      dryrun: true
-    };
-    await scrap(options, this.dependencies)
-    expect(this.disk).not.toHaveProperty(path.resolve('output.json'))
-
-    expect(this.dependencies.console.getLogs('log', /test-0033/)).toMatch(/test-0033/)
-    
-  });
-
 
 });
