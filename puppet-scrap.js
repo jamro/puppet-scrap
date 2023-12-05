@@ -1,6 +1,8 @@
 #! /usr/bin/env node
 import { program } from 'commander'
-import scrap, { defaultScrapperOptions } from './src/scrap.js'
+import scrap from './src/scrap.js'
+
+import { defaultScrapperOptions } from './src/utils/options.js'
 
 (async () => {
   program

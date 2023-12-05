@@ -5,52 +5,9 @@ import path from 'path'
 import jsonpath from 'jsonpath'
 import fs from 'fs';
 import loadScript from './loadScript.js';
-
-export const defaultScrapperOptions = {
-  limit: Number.MAX_VALUE,
-  delay: 500,
-  query: '$',
-  output: undefined,
-  pretty: false,
-  retry: false,
-  silent: false,
-}
-
-function fillOptions(options) {
-  if(options.dataset === undefined) {
-    throw new Error('Missing parameter: options.dataset is required!')
-  }
-  if(options.script === undefined) {
-    throw new Error('Missing parameter: options.script is required!')
-  }
-
-  const keys = Object.keys(defaultScrapperOptions)
-  for (let key of keys) {
-    if(options[key] === undefined) {
-      options[key] = defaultScrapperOptions[key]
-    }
-  }
-
-  return options
-}
-
-function formatTimeLeft(sec) {
-  if(sec === null) return '???'
-  let t = Math.round(sec)
-  let s = t % 60
-  t = (t - s)/60
-  let m = t % 60
-  t = (t - m)/60
-  let h = t
-  return `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
-}
-
-async function waitForRetry(sec, logger) {
-  for(let i=sec; i >= 0; i--) {
-    await new Promise(done => setTimeout(done, 1000))
-    logger.log(`Retry in ${formatTimeLeft(i)}...`)
-  }
-}
+import formatTimeLeft from './utils/formatTimeLeft.js'
+import waitForRetry from './utils/waitForRetry.js'
+import {fillDefaultOptions} from './utils/options.js'
 
 function getLibs(dependencies) {
   const libs = {}
@@ -69,7 +26,7 @@ function getLibs(dependencies) {
 
 
 export default async function(options={}, dependencies={}) {
-  fillOptions(options)
+  fillDefaultOptions(options)
   const {
     _fsAsync, 
     _fs,
